@@ -1095,19 +1095,20 @@ zingel";
 
 #[wasm_bindgen]
 pub fn validate_cod_golf(s: &str) -> String {
+    let newline_free_string = s.split("\n").collect::<Vec<&str>>().join("");
     let split_fishes = FISHES.split("\n");
     let included = split_fishes
         .clone()
-        .filter(|fish| subsequence(fish, s))
+        .filter(|fish| subsequence(fish, &newline_free_string))
         .collect::<Vec<&str>>()
         .join("\n");
     let excluded = split_fishes
-        .filter(|fish| !subsequence(fish, s))
+        .filter(|fish| !subsequence(fish, &newline_free_string))
         .collect::<Vec<&str>>()
         .join("\n");
     let count = included.lines().count();
     let score = if count >= THRESHOLD {
-        s.bytes().count().to_string()
+        newline_free_string.bytes().count().to_string()
     } else {
         "-".to_string()
     };
