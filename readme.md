@@ -1,6 +1,6 @@
 # Cod Golf validator
 
-A validator for entries to a [coding challenge on Code Golf Codidact](https://codegolf.codidact.com/posts/).
+A validator for entries to a [coding challenge on Code Golf Codidact](https://codegolf.codidact.com/posts/295692).
 
 ## :link: Webpage
 
