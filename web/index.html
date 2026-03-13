@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+        <title>Cod golf validator</title>
+    </head>
+    <body>
+        <script type="module">
+            import init, { validate_cod_golf } from "./cod_golf_validator.js";
+            const run = async () => {
+                await init();
+                document.getElementById("validate_button").onclick = () => {
+                    let candidate =
+                        document.getElementById("string_input").value;
+                    let [score, count, comparator, included, excluded] =
+                        validate_cod_golf(candidate).split(";");
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("fish_count").innerHTML = count;
+                    document.getElementById("count_comparator").innerHTML =
+                        comparator;
+                    document.getElementById("included").innerHTML = included;
+                    document.getElementById("excluded").innerHTML = excluded;
+                };
+            };
+            run();
+        </script>
+        <h1>Cod golf validator</h1>
+        <h2>String to be validated</h2>
+        <textarea autofocus id="string_input" rows="1" cols="40"></textarea>
+        <br />
+        <button id="validate_button">Validate string</button>
+        <h2>Outcome</h2>
+        <p>Score: <span id="score">-</span></p>
+        <p><span id="fish_count">0</span> fishes are included.</p>
+        <p>
+            This is <span id="count_comparator">less than</span> the 255 fishes
+            required.
+        </p>
+        <h3>Included</h3>
+        <textarea id="included" readonly></textarea>
+        <h3>Excluded</h3>
+        <textarea id="excluded" readonly></textarea>
+        <hr />
+        <a
+            href="https://github.com/trichoplax/cod-golf-validator"
+            target="_blank"
+            title="View the source code on GitHub"
+        >
+            Source code (opens in new tab)
+        </a>
+    </body>
+</html>
