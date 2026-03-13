@@ -1107,7 +1107,7 @@ pub fn validate_cod_golf(s: &str) -> String {
         .join("\n");
     let count = included.lines().count();
     let score = if count >= THRESHOLD {
-        s.len().to_string()
+        s.bytes().count().to_string()
     } else {
         "-".to_string()
     };
