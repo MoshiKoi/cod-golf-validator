@@ -7,8 +7,16 @@
     <body>
         <script type="module">
             import init, { validate_cod_golf } from "./cod_golf_validator.js";
+            const decompressionStream = new DecompressionStream("gzip");
             const run = async () => {
-                await init();
+                const res =  fetch('cod_golf_validator_bg.wasm.gz')
+                        .then(res => res.body)
+                        .then(body => body.pipeThrough(decompressionStream))
+                        .then(stream => new Response(
+                            stream,
+                            { headers: {'Content-Type': 'application/wasm' } }))
+
+                await init({module_or_path: res});
                 document.getElementById("validate_button").onclick = () => {
                     let candidate =
                         document.getElementById("string_input").value;

@@ -48,4 +48,14 @@ Use `wasm-bindgen` to optimise that WASM file and include it along with a JavaSc
 wasm-bindgen ./target/wasm32-unknown-unknown/release/cod_golf_validator.wasm --out-dir web --no-typescript --target web
 ```
 
+#### Step 3
+Use `wasm-opt` to optimise the WASM file
+
+```bash
+wasm-opt ./web/cod_golf_validator_bg.wasm -o ./web/cod_golf_validator_bg.wasm -Oz --enable-bulk-memory-opt
+```
+
+#### Step 4
+GZip the resulting file
+
 GitHub pages is currently configured to serve the contents of the `web` directory. It does no compilation. Pushing changes to the Rust code will have no effect on GitHub pages unless you first compile (both the Cargo and `wasm-bindgen` steps) so that the `web` directory reflects those changes.
